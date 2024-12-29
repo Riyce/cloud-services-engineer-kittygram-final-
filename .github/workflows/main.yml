@@ -15,6 +15,7 @@ env:
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: 127.0.0.1
   POSTGRES_PORT: 5432
+  POSTGRES_HOST_AUTH_METHOD: trust
 
 jobs:
   lint_and_test_backend_service:
