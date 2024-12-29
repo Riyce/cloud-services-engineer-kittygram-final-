@@ -29,7 +29,7 @@ jobs:
         run: make deps-dev
 
       - name: Run lint
-        run: make lint
+        run: make backend-lint
 
 #      - name: Run tests
 #        run: make test

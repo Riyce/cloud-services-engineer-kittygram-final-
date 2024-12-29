@@ -1,15 +1,35 @@
 SHELL := /bin/bash
+SERVICE = kittygram-backend
+SERVICE_DIR = backend
+
+pyenv:
+	pyenv install -s 3.9.7 && pyenv virtualenv -f 3.9.7 $(SERVICE)
+
+deps: deps-prepare deps-prod deps-dev deps-check
+
+deps-prepare:
+	pip install -U pip
+	pip install setuptools wheel
 
 deps-prod:
-	python -m pip install --upgrade pip
-	pip3 install -r backend/requirements.txt
+	pip install -r $(SERVICE_DIR)/requirements.txt
 
 deps-dev:
-	python -m pip install --upgrade pip
-	pip3 install -r backend/requirements.dev.txt
+	pip install -r $(SERVICE_DIR)/requirements.dev.txt
 
-lint:
-	python -m flake8 backend/
+deps-check:
+	pip check
 
-test:
-	python backend/manage.py test
+backend-lint: flake8 black isort
+
+flake8:
+	python -m flake8 $(SERVICE_DIR)/
+
+black:
+	black $(SERVICE_DIR)/
+
+isort:
+	isort $(SERVICE_DIR)/
+
+backend-test:
+	python $(SERVICE_DIR)/manage.py test
