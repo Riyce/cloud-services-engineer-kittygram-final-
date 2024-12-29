@@ -10,11 +10,21 @@ on:
     - main
 
 env:
-  DOCKER_BUILDKIT: 1
+  POSTGRES_USER: postgres
+  POSTGRES_DB: kittygram
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: 127.0.0.1
+  POSTGRES_PORT: 5432
 
 jobs:
   lint_and_test_backend_service:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13
+        ports:
+          - 5432:$(POSTGRES_PORT)
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Check out code
@@ -31,8 +41,5 @@ jobs:
       - name: Run lint
         run: make backend-lint
 
-#      - name: Run tests
-#        run: make test
-
-
-
+      - name: Run tests
+        run: make backend-test

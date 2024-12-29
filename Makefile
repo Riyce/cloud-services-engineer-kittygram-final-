@@ -33,3 +33,4 @@ isort:
 
 backend-test:
 	python $(SERVICE_DIR)/manage.py test
+	pytest
