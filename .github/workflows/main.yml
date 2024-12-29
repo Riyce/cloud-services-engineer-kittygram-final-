@@ -10,9 +10,9 @@ on:
     - main
 
 env:
-  POSTGRES_USER: postgres
+  POSTGRES_USER: postgres_user
   POSTGRES_DB: kittygram
-  POSTGRES_PASSWORD: postgres
+  POSTGRES_PASSWORD: postgres_password
   POSTGRES_HOST: 127.0.0.1
   POSTGRES_PORT: 5432
   POSTGRES_HOST_AUTH_METHOD: trust
