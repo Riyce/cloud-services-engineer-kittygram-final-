@@ -20,16 +20,16 @@ deps-dev:
 deps-check:
 	pip check
 
-backend-lint: flake8 black isort
+backend-lint: black isort flake8
 
 flake8:
 	python -m flake8 $(SERVICE_DIR)/
 
 black:
-	black $(SERVICE_DIR)/
+	black --check $(SERVICE_DIR)/
 
 isort:
-	isort $(SERVICE_DIR)/
+	isort --check $(SERVICE_DIR)/
 
 backend-test:
 	python $(SERVICE_DIR)/manage.py test
