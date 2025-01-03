@@ -26,11 +26,19 @@ flake8:
 	python -m flake8 $(SERVICE_DIR)/
 
 black:
+ifeq ($(MODE), ci)
 	black --check $(SERVICE_DIR)/
+else
+	black $(SERVICE_DIR)/
+endif
+
 
 isort:
+ifeq ($(MODE), ci)
 	isort --check $(SERVICE_DIR)/
+else
+	isort $(SERVICE_DIR)/
+endif
 
 backend-test:
 	python $(SERVICE_DIR)/manage.py test
-	pytest
